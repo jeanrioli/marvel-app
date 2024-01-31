@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Characters, Comics, Creators, Favorites, Home } from '../pages';
+import { Characters, Comics, Creators, Favorites, Home } from '../features';
 
 export const Router: FC = () => {
 	return (
