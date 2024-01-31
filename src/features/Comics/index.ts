@@ -1,1 +1,2 @@
-export * from './Comics';
+export * from './services';
+export * from './views';

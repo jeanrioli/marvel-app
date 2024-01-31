@@ -1,1 +1,2 @@
-export * from './Favorites';
+export * from './services';
+export * from './views';

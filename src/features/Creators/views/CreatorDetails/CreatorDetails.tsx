@@ -1,16 +1,16 @@
 import { FC } from 'react';
-import * as Styled from './Comics.styled';
+import * as Styled from './CreatorDetails.styled';
 
-import { Button, Title } from '../../components';
+import { Button, Title } from '../../../../components';
 import { useNavigate } from 'react-router-dom';
 
-export const Comics: FC = () => {
+export const CreatorDetails: FC = () => {
 	const redirect = useNavigate();
 
 	return (
 		<Styled.Container>
 			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
-			<Title title='Comics' />
+			<Title title='Creator Details' />
 		</Styled.Container>
 	);
 };
