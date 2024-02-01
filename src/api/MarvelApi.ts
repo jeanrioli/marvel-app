@@ -24,10 +24,9 @@ export class MarvelApi {
 
 		try {
 			const response: AxiosResponse = await axios.get(baseUrl + endpoint + '?' + credentials);
-			return { success: true, body: response.data.data.results };
+			return { success: true, body: response.data };
 		} catch (error) {
 			const _error = error as AxiosError;
-			console.log(_error);
 			return { success: false, status: _error.response?.status, body: _error.response?.data };
 		}
 	}

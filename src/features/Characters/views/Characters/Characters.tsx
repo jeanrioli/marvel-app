@@ -1,18 +1,22 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import * as Styled from './Characters.styled';
 
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, Title } from '../../../../components';
+import { Button, Card, Title } from '../../../../components';
 import { CharacterService } from '../../services';
+import { useNavigate } from 'react-router-dom';
+import { Character } from '../../../../entities';
 
 export const Characters: FC = () => {
 	const redirect = useNavigate();
+	const [characters, setCharacters] = useState<Array<Character>>([]);
 
 	useEffect(() => {
 		const fetchCharacters = async () => {
-			const response = await CharacterService.GetCharacters();
+			const { characters } = await CharacterService.GetCharacters();
 
-			console.log(response);
+			if (characters) {
+				setCharacters(characters);
+			}
 		};
 
 		fetchCharacters();
@@ -22,14 +26,9 @@ export const Characters: FC = () => {
 		<Styled.Container>
 			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
 			<Title title='Characters' />
-			<Link to={'/characters/1'} style={{ textDecoration: 'none' }}>
-				<Styled.Card>
-					{/* Conteúdo do card */}
-					<h3>{'title'}</h3>
-					<p>{'description'}</p>
-					{/* Adicione mais detalhes conforme necessário */}
-				</Styled.Card>
-			</Link>
+			{characters.map((character) => (
+				<Card redirect={`/characters/${character.id}`} name={character.name} />
+			))}
 		</Styled.Container>
 	);
 };

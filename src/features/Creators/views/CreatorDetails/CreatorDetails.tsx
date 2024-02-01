@@ -1,11 +1,22 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import * as Styled from './CreatorDetails.styled';
 
 import { Button, Title } from '../../../../components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { CreatorService } from '../../services';
 
 export const CreatorDetails: FC = () => {
 	const redirect = useNavigate();
+	const { id } = useParams();
+
+	useEffect(() => {
+		const fetchCharacter = async () => {
+			if (!id) return;
+			const { creator } = await CreatorService.GetCreatorById(+id);
+		};
+
+		fetchCharacter();
+	}, []);
 
 	return (
 		<Styled.Container>

@@ -8,19 +8,18 @@ export const CharacterService = {
 		const response = await MarvelClient.Get('/characters');
 
 		if (!response.success) {
-			return { errorMessage: response.body.message };
+			return { errorMessage: response.body?.message };
 		}
-
-		return { characters: response.body };
+		return { characters: response.body?.data?.results };
 	},
 
-	GetCharactersById: async (id: number): Promise<Partial<{ characters: Character; errorMessage: string }>> => {
+	GetCharactersById: async (id: number): Promise<Partial<{ character: Character; errorMessage: string }>> => {
 		const response = await MarvelClient.Get(`/characters/${id}`);
 
 		if (!response.success) {
-			return { errorMessage: response.body.message };
+			return { errorMessage: response.body?.message };
 		}
 
-		return { characters: response.body };
+		return { character: response.body?.data?.results?.[0] };
 	},
 };

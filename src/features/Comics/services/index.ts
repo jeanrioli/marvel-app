@@ -1,1 +1,1 @@
-export * from './Comics.services';
+export * from './Comic.service';

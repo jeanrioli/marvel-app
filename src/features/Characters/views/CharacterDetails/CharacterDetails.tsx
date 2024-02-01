@@ -1,11 +1,22 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import * as Styled from './CharacterDetails.styled';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Title } from '../../../../components';
+import { CharacterService } from '../../services';
 
 export const CharacterDetails: FC = () => {
 	const redirect = useNavigate();
+	const { id } = useParams();
+
+	useEffect(() => {
+		const fetchCharacter = async () => {
+			if (!id) return;
+			const { character } = await CharacterService.GetCharactersById(+id);
+		};
+
+		fetchCharacter();
+	}, []);
 
 	return (
 		<Styled.Container>

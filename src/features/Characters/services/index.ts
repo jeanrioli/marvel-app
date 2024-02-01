@@ -1,1 +1,1 @@
-export * from './Characters.services';
+export * from './Character.service';

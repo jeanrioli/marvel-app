@@ -1,1 +1,1 @@
-export * from './Creators.services';
+export * from './Creator.service';
