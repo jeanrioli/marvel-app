@@ -1,4 +1,4 @@
 export type Image = {
 	extension: string;
-	path: 'string';
+	path: string;
 };

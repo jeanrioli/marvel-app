@@ -12,7 +12,7 @@ export const ComicDetails: FC = () => {
 	useEffect(() => {
 		const fetchCharacter = async () => {
 			if (!id) return;
-			const { comic } = await ComicService.GetComicById(+id);
+			const { comics } = await ComicService.GetComicById(+id);
 		};
 
 		fetchCharacter();

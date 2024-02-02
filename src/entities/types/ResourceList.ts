@@ -1,4 +1,4 @@
-type Item = { name: string; resourceURI: string; type: string };
+type Item = { name: string; resourceURI: string; type?: string; role?: string };
 
 export type ResourceList = {
 	available: number;

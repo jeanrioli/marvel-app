@@ -12,7 +12,7 @@ export const CreatorDetails: FC = () => {
 	useEffect(() => {
 		const fetchCharacter = async () => {
 			if (!id) return;
-			const { creator } = await CreatorService.GetCreatorById(+id);
+			const { creators } = await CreatorService.GetCreatorById(Number(id));
 		};
 
 		fetchCharacter();

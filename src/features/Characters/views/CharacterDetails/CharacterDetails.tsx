@@ -12,7 +12,7 @@ export const CharacterDetails: FC = () => {
 	useEffect(() => {
 		const fetchCharacter = async () => {
 			if (!id) return;
-			const { character } = await CharacterService.GetCharactersById(+id);
+			const { characters } = await CharacterService.GetCharactersById(Number(id));
 		};
 
 		fetchCharacter();
