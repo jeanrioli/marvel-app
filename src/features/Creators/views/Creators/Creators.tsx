@@ -54,7 +54,7 @@ export const Creators: FC = () => {
 		<SearchPage>
 			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
 			<Title title='Comics' />
-			<Search onSearch={fetchCreatorsBySearch} onSelect={fetchCreatorById} />
+			{/* <Search onSearch={fetchCreatorsBySearch} onSelect={fetchCreatorById} /> */}
 			<CardList>
 				{creators.map((creator) => (
 					<Card key={creator.id} variant='creator' {...creator} />

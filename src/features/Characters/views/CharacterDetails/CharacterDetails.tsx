@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import * as Styled from './CharacterDetails.styled';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Title } from '../../../../components';
+import { Button, DetailPage, Title } from '../../../../components';
 import { CharacterService } from '../../services';
 
 export const CharacterDetails: FC = () => {
@@ -10,18 +10,17 @@ export const CharacterDetails: FC = () => {
 	const { id } = useParams();
 
 	useEffect(() => {
-		const fetchCharacter = async () => {
-			if (!id) return;
-			const { characters } = await CharacterService.GetCharactersById(Number(id));
-		};
-
-		fetchCharacter();
+		// const fetchCharacter = async () => {
+		// 	if (!id) return;
+		// 	const { characters } = await CharacterService.GetCharactersById(Number(id));
+		// };
+		// fetchCharacter();
 	}, []);
 
 	return (
-		<Styled.Container>
+		<DetailPage>
 			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
 			<Title title='Character Details' />
-		</Styled.Container>
+		</DetailPage>
 	);
 };

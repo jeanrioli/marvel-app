@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import * as Styled from './Comics.styled';
 
 import { Button, Card, CardList, Search, SearchPage, Title } from '../../../../components';
 import { useNavigate } from 'react-router-dom';
@@ -8,14 +7,14 @@ import { Comic } from '../../../../entities';
 
 export const Comics: FC = () => {
 	const redirect = useNavigate();
-	const [comics, setCharacters] = useState<Array<Comic>>([]);
+	const [comicsList, setComicsList] = useState<Array<Comic>>([]);
 
 	useEffect(() => {
 		const fetchComics = async () => {
 			const { comics } = await ComicService.GetComics();
 
 			if (comics) {
-				setCharacters(comics);
+				setComicsList(comics);
 			}
 		};
 
@@ -31,7 +30,7 @@ export const Comics: FC = () => {
 		const { comics } = await ComicService.GetComicById(id);
 
 		if (comics) {
-			setCharacters(comics);
+			setComicsList(comics);
 		}
 	};
 
@@ -49,13 +48,17 @@ export const Comics: FC = () => {
 		return results;
 	};
 
+	const clearResults = () => {
+		setComicsList([]);
+	};
+
 	return (
 		<SearchPage>
 			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
 			<Title title='Comics' />
-			<Search onSearch={fetchCharactersBySearch} onSelect={fetchCharactersById} />
+			{/* <Search onSearch={fetchCharactersBySearch} onSelect={fetchCharactersById} /> */}
 			<CardList>
-				{comics.map((comic) => (
+				{comicsList.map((comic) => (
 					<Card key={comic.id} variant='comic' {...comic} />
 				))}
 			</CardList>
