@@ -18,7 +18,6 @@ export const Authentication: FC = () => {
 		setCookie('privateKey', privateKey);
 
 		if (!!publicKey && !!privateKey) {
-			console.log('redirect');
 			setIsAuthenticated(true);
 			redirect('/');
 			return;

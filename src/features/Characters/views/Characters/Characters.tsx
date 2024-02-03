@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useLayoutEffect, useState } from 'react';
 
-import { Button, Card, CardList, SearchPage, Search, Title, Loading } from '../../../../components';
+import { Button, Card, CardList, SearchPage, SearchBar, Title, Loading } from '../../../../components';
 import { CharacterService } from '../../services';
 import { useNavigate } from 'react-router-dom';
 import { Character } from '../../../../entities';
@@ -10,18 +10,18 @@ export const Characters: FC = () => {
 	const [charactersList, setCharactersList] = useState<Array<Character>>([]);
 	const [searching, setSearching] = useState<boolean>(false);
 	const [characterSearched, setCharacterSearched] = useState<Array<Character>>([]);
-	const [offset, setOffset] = useState<number>(0);
+	const [page, setPage] = useState<number>(0);
 
 	useEffect(() => {
 		document.addEventListener('scroll', handleInfinityScroll);
 		return () => document.removeEventListener('scroll', handleInfinityScroll);
 	}, []);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const fetchCharacters = async () => {
 			setSearching(true);
 
-			const { characters, errorMessage } = await CharacterService.GetCharacters(offset);
+			const { characters, errorMessage } = await CharacterService.GetCharacters(page);
 
 			if (!!errorMessage) {
 				setSearching(false);
@@ -41,13 +41,13 @@ export const Characters: FC = () => {
 		};
 
 		fetchCharacters();
-	}, [offset]);
+	}, [page]);
 
 	const handleInfinityScroll = () => {
 		const scrolledToTheBottom = window.innerHeight + Math.round(window.scrollY) >= document.body.offsetHeight;
 
 		if (scrolledToTheBottom) {
-			setOffset((prev) => prev + 1);
+			setPage((prev) => prev + 1);
 		}
 	};
 
@@ -95,15 +95,11 @@ export const Characters: FC = () => {
 		setCharacterSearched([]);
 	};
 
-	useEffect(() => {
-		console.log(characterSearched);
-	}, [characterSearched]);
-
 	return (
 		<SearchPage>
 			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
 			<Title title='Characters' />
-			<Search
+			<SearchBar
 				label='Search for a character'
 				onSearch={fetchCharactersBySearch}
 				onSelect={fetchCharactersById}

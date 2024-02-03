@@ -4,9 +4,13 @@ import { Creator } from '../../../entities/Creator';
 const MarvelClient = new MarvelApi();
 
 export const CreatorService = {
-	GetCreators: async (): Promise<Partial<{ creators: Array<Creator>; errorMessage: string }>> => {
+	GetCreators: async (page: number): Promise<Partial<{ creators: Array<Creator>; errorMessage: string }>> => {
+		const limit = 20;
+		const offset = limit * page;
+
 		const request: MarvelRequest = {
 			endpoint: '/creators',
+			query: `offset=${offset}&limit=${limit}`,
 		};
 
 		const response: MarvelResponse = await MarvelClient.Get(request);
@@ -33,7 +37,6 @@ export const CreatorService = {
 	},
 
 	GetCreatorByName: async (name: string): Promise<Partial<{ creators: Array<Creator>; errorMessage: string }>> => {
-		console.log(name);
 		const splittedName = name.split(' ');
 		const request: MarvelRequest = {
 			endpoint: '/creators',

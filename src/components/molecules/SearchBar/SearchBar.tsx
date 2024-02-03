@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
-import * as Styled from './Search.styled';
+import * as Styled from './SearchBar.styled';
 
 import { Input, Loading } from '../../atoms';
 
@@ -8,7 +8,7 @@ interface Suggestion {
 	value: number;
 }
 
-interface SearchProps {
+interface SearchBarProps {
 	loading: boolean;
 	label: string;
 	onSearch: (searchedValue: string) => Promise<Array<Suggestion>>;
@@ -16,7 +16,7 @@ interface SearchProps {
 	onClear: () => void;
 }
 
-export const Search: FC<SearchProps> = ({ label, loading, onSearch, onSelect, onClear }) => {
+export const SearchBar: FC<SearchBarProps> = ({ label, loading, onSearch, onSelect, onClear }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [suggestions, setSuggestions] = useState<Array<Suggestion>>([]);
@@ -32,8 +32,6 @@ export const Search: FC<SearchProps> = ({ label, loading, onSearch, onSelect, on
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { value } = event.target;
 		setSearchTerm(value);
-
-		console.log(searchTimeout);
 
 		if (searchTimeout) {
 			clearTimeout(searchTimeout);
