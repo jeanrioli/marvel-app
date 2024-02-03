@@ -1,14 +1,15 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import * as Styled from './Header.styled';
-import { AppContext } from '../../../infraestructure';
 import { IconMoon } from '../../../icons/IconMoon';
 import { Button } from '../../atoms';
 import { IconMoonFilled, IconProfile, IconProfileFilled } from '../../../icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { ReduxProps } from '.';
 
-export const Header: FC = () => {
+interface HeaderProps extends ReduxProps {}
+
+export const Header: FC<HeaderProps> = ({ isAuthenticated, isDarkTheme, setIsAuthenticated, setIsDarkTheme }) => {
 	const redirect = useNavigate();
-	const { isDarkTheme, isAuthenticated, setIsDarkTheme } = useContext(AppContext);
 
 	return (
 		<Styled.Container>
@@ -30,7 +31,7 @@ export const Header: FC = () => {
 							variant='icon'
 							icon={isAuthenticated ? <IconProfileFilled /> : <IconProfile />}
 							onClick={() => redirect('/authentication')}
-							aria-label='Change color theme'
+							aria-label='sign up'
 						/>
 					</Styled.Profile>
 				</Styled.Buttons>

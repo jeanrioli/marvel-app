@@ -1,14 +1,15 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
 import * as Styled from './Authentication.styled';
 
 import { useCookies } from 'react-cookie';
 import { Button, ButtonPage, Input, Title } from '../../components';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../infraestructure';
 import { Helmet } from 'react-helmet';
+import { ReduxProps } from '.';
 
-export const Authentication: FC = () => {
-	const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
+interface AuthenticationProps extends ReduxProps {}
+
+export const Authentication: FC<AuthenticationProps> = ({ isAuthenticated, setIsAuthenticated }) => {
 	const [publicKey, setPublicKey] = useState('dee2436a7571e5855f3a9fd04b131220');
 	const [privateKey, setPrivateKey] = useState('ca2306cf85da44d5b4a7726e6ed894c8c8468314');
 	const [_, setCookie] = useCookies();
