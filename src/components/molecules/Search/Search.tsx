@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import * as Styled from './Search.styled';
 
 import { Input, Loading } from '../../atoms';
@@ -20,6 +20,14 @@ export const Search: FC<SearchProps> = ({ label, loading, onSearch, onSelect, on
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [suggestions, setSuggestions] = useState<Array<Suggestion>>([]);
+
+	useEffect(() => {
+		const handleOutsideClick = () => {
+			setSuggestions([]);
+		};
+		window.addEventListener('click', handleOutsideClick);
+		return () => window.removeEventListener('click', handleOutsideClick);
+	}, []);
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { value } = event.target;

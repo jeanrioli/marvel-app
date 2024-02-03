@@ -17,14 +17,13 @@ export const Container = styled.div`
 
 export const Thumbnail = styled.img`
 	width: 100%;
-	height: 200px;
-	object-fit: cover;
+
+	aspect-ratio: 4/5;
 `;
 
 export const Name = styled.div`
 	color: #fff;
 	text-transform: uppercase;
-	/* padding: 8px 8px; */
 
 	white-space: nowrap;
 	text-overflow: ellipsis;

@@ -11,6 +11,8 @@ export const Icon = styled.div`
 	color: #f0141e;
 	display: flex;
 	align-items: center;
+	height: 24px;
+	width: 24px;
 `;
 
 export const Label = styled.div`

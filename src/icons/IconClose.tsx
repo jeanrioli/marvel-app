@@ -2,8 +2,15 @@ import { FC } from 'react';
 
 export const IconClose: FC = () => {
 	return (
-		<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='20' height='20' viewBox='0 0 50 50'>
-			<path d='M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z'></path>
+		<svg fill='currentColor' version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+			<g>
+				<g>
+					<polygon
+						points='512,59.076 452.922,0 256,196.922 59.076,0 0,59.076 196.922,256 0,452.922 59.076,512 256,315.076 452.922,512 
+       512,452.922 315.076,256 		'
+					/>
+				</g>
+			</g>
 		</svg>
 	);
 };

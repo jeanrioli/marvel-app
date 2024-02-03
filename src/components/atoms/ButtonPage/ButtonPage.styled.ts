@@ -3,19 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.button`
 	cursor: pointer;
 	padding: 8px;
-	border: none;
-	background-color: #f0141e;
-	color: #fff;
+	background-color: ${({ theme }) => theme.colors.primary};
+	color: ${({ theme }) => theme.colors.secondary};
 	text-transform: uppercase;
 	font-size: 24px;
-	border: 1px solid #f0141e;
+	border: 1px solid ${({ theme }) => theme.colors.primary};
 	width: 100%;
 	max-width: 300px;
 
 	&:hover {
-		background-color: #fff;
-		color: #f0141e;
-		border: 1px solid #f0141e;
+		background-color: ${({ theme }) => theme.colors.quaternary};
+		color: ${({ theme }) => theme.colors.primary};
+		border: 1px solid ${({ theme }) => theme.colors.primary};
 	}
 
 	@media screen and (min-width: 768px) {

@@ -9,18 +9,20 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input: FC<InputProps> = ({ label, onClickIcon, ...props }) => {
 	return (
-		<Styled.Fieldset>
-			<Styled.Legend>{label}</Styled.Legend>
-			<Styled.InputContainer>
-				<Styled.Input {...props} />
-				{props.value ? (
-					<Styled.Icon onClick={onClickIcon}>
-						<div>
-							<IconClose />
-						</div>
-					</Styled.Icon>
-				) : null}
-			</Styled.InputContainer>
-		</Styled.Fieldset>
+		<Styled.Container>
+			<Styled.Fieldset>
+				<Styled.Legend>{label}</Styled.Legend>
+				<Styled.InputContainer>
+					<Styled.Input {...props} />
+					{props.value ? (
+						<Styled.Icon onClick={onClickIcon}>
+							<div>
+								<IconClose />
+							</div>
+						</Styled.Icon>
+					) : null}
+				</Styled.InputContainer>
+			</Styled.Fieldset>
+		</Styled.Container>
 	);
 };

@@ -1,20 +1,23 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+	width: 100%;
 	display: flex;
-	padding: 8px;
 `;
 
 export const Fieldset = styled.fieldset`
-	width: 100%;
-	border: solid 1px #aaa;
+	flex: 1;
+	border: solid 1px ${({ theme }) => theme.colors.tertiary};
 `;
 
-export const Legend = styled.legend``;
+export const Legend = styled.legend`
+	color: ${({ theme }) => theme.colors.tertiary};
+`;
 
 export const Input = styled.input`
 	all: unset;
 	flex: 1;
+	color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const InputContainer = styled.span`
@@ -22,6 +25,9 @@ export const InputContainer = styled.span`
 `;
 
 export const Icon = styled.button`
+	color: ${({ theme }) => theme.colors.tertiary};
+	width: 12px;
+	height: 12px;
 	cursor: pointer;
 	background: none;
 	padding: 0;
