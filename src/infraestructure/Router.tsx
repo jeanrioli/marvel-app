@@ -9,6 +9,7 @@ import {
 	CreatorDetails,
 	Home,
 	Favorites,
+	Authentication,
 } from '../features';
 
 export const Router: FC = () => {
@@ -22,6 +23,7 @@ export const Router: FC = () => {
 			<Route path='/creators' element={<Creators />} />
 			<Route path='/creators/:id' element={<CreatorDetails />} />
 			<Route path='/favorites' element={<Favorites />} />
+			<Route path='/authentication' element={<Authentication />} />
 		</Routes>
 	);
 };

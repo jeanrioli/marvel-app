@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Router } from './Router';
 import { CookiesProvider } from 'react-cookie';
 import { Base, Footer, Header } from '../components';
+import { AppProvider } from './AppProvider';
 
 function App() {
 	return (
@@ -9,7 +10,9 @@ function App() {
 			<BrowserRouter>
 				<Header />
 				<Base>
-					<Router />
+					<AppProvider>
+						<Router />
+					</AppProvider>
 				</Base>
 				<Footer />
 			</BrowserRouter>
