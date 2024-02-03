@@ -7,9 +7,5 @@ interface ThumbnailProps {
 }
 
 export const Thumbnail: FC<ThumbnailProps> = ({ src, alt }) => {
-	return (
-		<Styled.Container>
-			<Styled.Image src={src} alt={alt} />
-		</Styled.Container>
-	);
+	return <Styled.Image src={src} alt={alt} />;
 };
