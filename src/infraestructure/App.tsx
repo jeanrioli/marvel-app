@@ -3,19 +3,22 @@ import { Router } from './Router';
 import { CookiesProvider } from 'react-cookie';
 import { Base, Footer, Header } from '../components';
 import { AppProvider } from './AppProvider';
+import { ThemeContext } from './ThemeContext';
 
 function App() {
 	return (
 		<CookiesProvider defaultSetOptions={{ path: '/' }}>
-			<BrowserRouter>
-				<Header />
-				<Base>
-					<AppProvider>
-						<Router />
-					</AppProvider>
-				</Base>
-				<Footer />
-			</BrowserRouter>
+			<AppProvider>
+				<ThemeContext>
+					<BrowserRouter>
+						<Header />
+						<Base>
+							<Router />
+						</Base>
+						<Footer />
+					</BrowserRouter>
+				</ThemeContext>
+			</AppProvider>
 		</CookiesProvider>
 	);
 }

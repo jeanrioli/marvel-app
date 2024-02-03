@@ -1,33 +1,47 @@
-import { FC, ReactNode, createContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Dispatch, FC, ReactNode, SetStateAction, createContext, useEffect, useState } from 'react';
 import { getCookie } from '../utils';
-import { Authentication } from '../features';
+import { DefaultTheme } from 'styled-components';
+import LightTheme from '../themes/LightTheme';
+import DarkTheme from '../themes/DarkTheme';
 
-export const AppContext = createContext<{ isAuthenticated: boolean }>({ isAuthenticated: false });
+interface AppContextProps {
+	isAuthenticated: boolean;
+	isDarkTheme: boolean;
+	setIsDarkTheme: Dispatch<SetStateAction<boolean>>;
+	setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
+}
+
+export const AppContext = createContext<AppContextProps>({
+	isAuthenticated: false,
+	isDarkTheme: false,
+	setIsDarkTheme: () => {},
+	setIsAuthenticated: () => {},
+});
 
 export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-	const redirect = useNavigate();
+	const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
 	useEffect(() => {
 		const privateKey = getCookie('privateKey');
 		const publicKey = getCookie('publicKey');
 		const isAuthenticated = !!privateKey && !!publicKey;
 
-		if (!isAuthenticated) {
-			redirect('/authentication', { replace: true });
-		} else {
+		if (isAuthenticated) {
 			setIsAuthenticated(true);
 		}
-	}, [redirect]);
-
-	if (!isAuthenticated) {
-		return <Authentication />;
-	}
+	}, []);
 
 	return (
-		<div>
-			<AppContext.Provider value={{ isAuthenticated: isAuthenticated }}>{children}</AppContext.Provider>
-		</div>
+		<AppContext.Provider
+			value={{
+				isAuthenticated: isAuthenticated,
+				setIsAuthenticated: setIsAuthenticated,
+				isDarkTheme: isDarkTheme,
+				setIsDarkTheme: setIsDarkTheme,
+			}}
+		>
+			{children}
+		</AppContext.Provider>
 	);
 };

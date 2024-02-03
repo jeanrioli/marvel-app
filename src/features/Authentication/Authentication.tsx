@@ -4,11 +4,10 @@ import * as Styled from './Authentication.styled';
 import { useCookies } from 'react-cookie';
 import { Button, ButtonPage, Input, Title } from '../../components';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from '../../utils';
 import { AppContext } from '../../infraestructure';
 
 export const Authentication: FC = () => {
-	const { isAuthenticated } = useContext(AppContext);
+	const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
 	const [publicKey, setPublicKey] = useState('dee2436a7571e5855f3a9fd04b131220');
 	const [privateKey, setPrivateKey] = useState('ca2306cf85da44d5b4a7726e6ed894c8c8468314');
 	const [_, setCookie] = useCookies();
@@ -19,8 +18,13 @@ export const Authentication: FC = () => {
 		setCookie('privateKey', privateKey);
 
 		if (!!publicKey && !!privateKey) {
+			console.log('redirect');
+			setIsAuthenticated(true);
 			redirect('/');
+			return;
 		}
+
+		alert('Insert keys');
 	};
 
 	return (
