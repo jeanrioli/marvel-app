@@ -1,13 +1,17 @@
 import { FC } from 'react';
 import * as Styled from './Home.styled';
-import { ButtonPage, Loading, Title } from '../../components';
+import { ButtonPage, Title } from '../../components';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 export const Home: FC = () => {
 	const redirect = useNavigate();
 
 	return (
 		<Styled.Container>
+			<Helmet>
+				<title>Home | Marvel App</title>
+			</Helmet>
 			<Title title='Welcome to Marvel App!' subtitle='Select one of the pages below to see the content:' />
 			<Styled.Pages>
 				<ButtonPage label='Characters' onClick={() => redirect('/characters')} />

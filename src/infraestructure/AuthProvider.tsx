@@ -14,6 +14,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	const redirect = useNavigate();
 
 	useEffect(() => {
+		console.log({ isAuthenticated });
 		if (!isAuthenticated) {
 			redirect('/authentication', { replace: true });
 		}

@@ -4,6 +4,7 @@ import { Button, Card, CardList, SearchPage, SearchBar, Title, Loading } from '.
 import { ComicService } from '../../services';
 import { useNavigate } from 'react-router-dom';
 import { Comic } from '../../../../entities';
+import { Helmet } from 'react-helmet';
 
 export const Comics: FC = () => {
 	const redirect = useNavigate();
@@ -30,10 +31,8 @@ export const Comics: FC = () => {
 			}
 
 			if (comics) {
-				const _comics = [...comicsList];
-				const newArray = _comics.concat(comics);
+				setComicsList((prevList) => [...prevList, ...comics]);
 
-				setComicsList(newArray);
 				setSearching(false);
 			}
 
@@ -96,22 +95,27 @@ export const Comics: FC = () => {
 	};
 
 	return (
-		<SearchPage>
-			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
-			<Title title='Comics' />
-			<SearchBar
-				label='Search for a comic'
-				onSearch={fetchComicsBySearch}
-				onSelect={fetchComicsById}
-				onClear={clearResults}
-				loading={searching}
-			/>
-			<CardList>
-				{comicSearched.length > 0
-					? comicSearched.map((comic) => <Card key={comic.id} variant='comic' {...comic} />)
-					: comicsList.map((comic) => <Card key={comic.id} variant='comic' {...comic} />)}
-			</CardList>
-			{searching ? <Loading /> : null}
-		</SearchPage>
+		<>
+			<Helmet>
+				<title>Comics | Marvel App</title>
+			</Helmet>
+			<SearchPage>
+				<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
+				<Title title='Comics' />
+				<SearchBar
+					label='Search for a comic'
+					onSearch={fetchComicsBySearch}
+					onSelect={fetchComicsById}
+					onClear={clearResults}
+					loading={searching}
+				/>
+				<CardList>
+					{comicSearched.length > 0
+						? comicSearched.map((comic) => <Card key={comic.id} variant='comic' {...comic} />)
+						: comicsList.map((comic) => <Card key={comic.id} variant='comic' {...comic} />)}
+				</CardList>
+				{searching ? <Loading /> : null}
+			</SearchPage>
+		</>
 	);
 };

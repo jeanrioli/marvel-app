@@ -4,6 +4,7 @@ import { Button, Card, CardList, SearchPage, SearchBar, Title, Loading } from '.
 import { CharacterService } from '../../services';
 import { useNavigate } from 'react-router-dom';
 import { Character } from '../../../../entities';
+import { Helmet } from 'react-helmet';
 
 export const Characters: FC = () => {
 	const redirect = useNavigate();
@@ -30,10 +31,8 @@ export const Characters: FC = () => {
 			}
 
 			if (characters) {
-				const _characters = [...charactersList];
-				const newArray = _characters.concat(characters);
+				setCharactersList((prevList) => [...prevList, ...characters]);
 
-				setCharactersList(newArray);
 				setSearching(false);
 			}
 
@@ -96,22 +95,27 @@ export const Characters: FC = () => {
 	};
 
 	return (
-		<SearchPage>
-			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
-			<Title title='Characters' />
-			<SearchBar
-				label='Search for a character'
-				onSearch={fetchCharactersBySearch}
-				onSelect={fetchCharactersById}
-				onClear={clearResults}
-				loading={searching}
-			/>
-			<CardList>
-				{characterSearched.length > 0
-					? characterSearched.map((character) => <Card key={character.id} variant='character' {...character} />)
-					: charactersList.map((character) => <Card key={character.id} variant='character' {...character} />)}
-			</CardList>
-			{searching ? <Loading /> : null}
-		</SearchPage>
+		<>
+			<Helmet>
+				<title>Characters | Marvel App</title>
+			</Helmet>
+			<SearchPage>
+				<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
+				<Title title='Characters' />
+				<SearchBar
+					label='Search for a character'
+					onSearch={fetchCharactersBySearch}
+					onSelect={fetchCharactersById}
+					onClear={clearResults}
+					loading={searching}
+				/>
+				<CardList>
+					{characterSearched.length > 0
+						? characterSearched.map((character) => <Card key={character.id} variant='character' {...character} />)
+						: charactersList.map((character) => <Card key={character.id} variant='character' {...character} />)}
+				</CardList>
+				{searching ? <Loading /> : null}
+			</SearchPage>
+		</>
 	);
 };

@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { Button, ButtonPage, Input, Title } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../infraestructure';
+import { Helmet } from 'react-helmet';
 
 export const Authentication: FC = () => {
 	const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
@@ -28,6 +29,9 @@ export const Authentication: FC = () => {
 
 	return (
 		<Styled.Container>
+			<Helmet>
+				<title>Authentication | Marvel App</title>
+			</Helmet>
 			{isAuthenticated ? <Button variant='icon' label='Back to Home' onClick={() => redirect('/')} /> : null}
 			<Title title='Authentication' />
 			<Input

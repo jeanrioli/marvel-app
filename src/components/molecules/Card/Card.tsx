@@ -25,7 +25,9 @@ export const Card: FC<CardProps> = (props) => {
 		return (
 			<Styled.Container key={props.id} onClick={() => redirect(`/characters/${props.id}`)}>
 				<Styled.Thumbnail src={`${props.thumbnail.path}.${props.thumbnail.extension}`} alt={props.name} />
-				<Styled.Name>{props.name}</Styled.Name>
+				<Styled.NameContainer>
+					<Styled.Name>{props.name}</Styled.Name>
+				</Styled.NameContainer>
 			</Styled.Container>
 		);
 	}
@@ -34,7 +36,9 @@ export const Card: FC<CardProps> = (props) => {
 		return (
 			<Styled.Container key={props.id} onClick={() => redirect(`/characters/${props.id}`)}>
 				<Styled.Thumbnail src={`${props.thumbnail.path}.${props.thumbnail.extension}`} alt={props.fullName} />
-				<Styled.Name>{props.fullName}</Styled.Name>
+				<Styled.NameContainer>
+					<Styled.Name>{props.fullName}</Styled.Name>
+				</Styled.NameContainer>
 			</Styled.Container>
 		);
 	}
@@ -43,7 +47,9 @@ export const Card: FC<CardProps> = (props) => {
 		return (
 			<Styled.Container key={props.id} onClick={() => redirect(`/characters/${props.id}`)}>
 				<Styled.Thumbnail src={`${props.thumbnail.path}.${props.thumbnail.extension}`} alt={props.title} />
-				<Styled.Name>{props.title}</Styled.Name>
+				<Styled.NameContainer>
+					<Styled.Name>{props.title}</Styled.Name>
+				</Styled.NameContainer>
 			</Styled.Container>
 		);
 	}

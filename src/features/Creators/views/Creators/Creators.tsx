@@ -4,6 +4,7 @@ import { Button, Card, CardList, SearchPage, SearchBar, Title, Loading } from '.
 import { CreatorService } from '../../services';
 import { useNavigate } from 'react-router-dom';
 import { Creator } from '../../../../entities';
+import { Helmet } from 'react-helmet';
 
 export const Creators: FC = () => {
 	const redirect = useNavigate();
@@ -96,22 +97,27 @@ export const Creators: FC = () => {
 	};
 
 	return (
-		<SearchPage>
-			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
-			<Title title='Creators' />
-			<SearchBar
-				label='Search for a creator'
-				onSearch={fetchCreatorsBySearch}
-				onSelect={fetchCreatorsById}
-				onClear={clearResults}
-				loading={searching}
-			/>
-			<CardList>
-				{creatorSearched.length > 0
-					? creatorSearched.map((creator) => <Card key={creator.id} variant='creator' {...creator} />)
-					: creatorsList.map((creator) => <Card key={creator.id} variant='creator' {...creator} />)}
-			</CardList>
-			{searching ? <Loading /> : null}
-		</SearchPage>
+		<>
+			<Helmet>
+				<title>Creators | Marvel App</title>
+			</Helmet>
+			<SearchPage>
+				<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
+				<Title title='Creators' />
+				<SearchBar
+					label='Search for a creator'
+					onSearch={fetchCreatorsBySearch}
+					onSelect={fetchCreatorsById}
+					onClear={clearResults}
+					loading={searching}
+				/>
+				<CardList>
+					{creatorSearched.length > 0
+						? creatorSearched.map((creator) => <Card key={creator.id} variant='creator' {...creator} />)
+						: creatorsList.map((creator) => <Card key={creator.id} variant='creator' {...creator} />)}
+				</CardList>
+				{searching ? <Loading /> : null}
+			</SearchPage>
+		</>
 	);
 };

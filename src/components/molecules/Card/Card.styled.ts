@@ -4,7 +4,7 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	cursor: pointer;
-	background-color: #202020;
+	background-color: ${({ theme }) => theme.colors.tertiary};
 	transition: 0.3s;
 	overflow: hidden;
 	box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.5);
@@ -21,8 +21,12 @@ export const Thumbnail = styled.img`
 	aspect-ratio: 4/5;
 `;
 
+export const NameContainer = styled.div`
+	padding: 8px;
+`;
+
 export const Name = styled.div`
-	color: #fff;
+	color: ${({ theme }) => theme.colors.quaternary};
 	text-transform: uppercase;
 
 	white-space: nowrap;

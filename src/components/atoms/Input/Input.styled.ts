@@ -17,7 +17,7 @@ export const Legend = styled.legend`
 export const Input = styled.input`
 	all: unset;
 	flex: 1;
-	color: ${({ theme }) => theme.colors.primary};
+	color: ${({ theme }) => theme.colors.tertiary};
 `;
 
 export const InputContainer = styled.span`
