@@ -3,3 +3,4 @@ export * from './ButtonPage';
 export * from './Input';
 export * from './Loading';
 export * from './Title';
+export * from './Thumbnail';

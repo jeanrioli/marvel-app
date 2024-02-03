@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getCookie } from '../../utils';
 import { ReduxProps } from '.';
@@ -20,7 +20,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children, isAuthenticated,
 			redirect('/authentication', { replace: true });
 			setIsAuthenticated(false);
 		}
-	}, [isAuthenticated, location.pathname]);
+	}, [isAuthenticated, location.pathname, hasKeys]);
 
 	if (!isAuthenticated || !hasKeys) {
 		return <Authentication />;

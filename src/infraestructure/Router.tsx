@@ -8,7 +8,6 @@ import {
 	Creators,
 	CreatorDetails,
 	Home,
-	Favorites,
 	Authentication,
 } from '../features';
 import { AuthProvider } from './AuthProvider';
@@ -24,7 +23,6 @@ export const Router: FC = () => {
 				<Route path='/comics/:id' element={<ComicDetails />} />
 				<Route path='/creators' element={<Creators />} />
 				<Route path='/creators/:id' element={<CreatorDetails />} />
-				<Route path='/favorites' element={<Favorites />} />
 				<Route path='/authentication' element={<Authentication />} />
 			</Routes>
 		</AuthProvider>

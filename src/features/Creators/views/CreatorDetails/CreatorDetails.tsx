@@ -1,27 +1,44 @@
-import { FC, useEffect } from 'react';
-import * as Styled from './CreatorDetails.styled';
+import { FC, useEffect, useState } from 'react';
 
-import { Button, Title } from '../../../../components';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Button, DetailPage, Thumbnail, Title } from '../../../../components';
 import { CreatorService } from '../../services';
+import { Creator } from '../../../../entities';
 
 export const CreatorDetails: FC = () => {
 	const redirect = useNavigate();
 	const { id } = useParams();
+	const [creator, setCreator] = useState<Creator | null>(null);
 
 	useEffect(() => {
-		const fetchCharacter = async () => {
+		const fetchCreator = async () => {
 			if (!id) return;
-			const { creators } = await CreatorService.GetCreatorById(Number(id));
+
+			const { creators, errorMessage } = await CreatorService.GetCreatorById(Number(id));
+
+			if (errorMessage) {
+				alert(errorMessage);
+			}
+
+			if (!creators || creators?.length === 0) {
+				redirect('/');
+				return;
+			}
+
+			setCreator(creators[0]);
 		};
 
-		fetchCharacter();
-	}, []);
+		fetchCreator();
+	}, [id]);
+
+	if (!creator) return null;
 
 	return (
-		<Styled.Container>
+		<DetailPage>
 			<Button variant='icon' label='Back to Home' onClick={() => redirect('/')} />
-			<Title title='Creator Details' />
-		</Styled.Container>
+			<Title title={creator.fullName} />
+			<Thumbnail src={creator.thumbnail.path + '.' + creator.thumbnail.extension} alt={creator.fullName} />
+			<span>{'Nothing to see here!'}</span>
+		</DetailPage>
 	);
 };

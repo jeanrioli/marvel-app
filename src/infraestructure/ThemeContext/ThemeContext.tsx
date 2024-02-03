@@ -15,7 +15,7 @@ export const ThemeContext: FC<ThemeContextProps> = ({ children, isDarkTheme, set
 
 			setIsDarkTheme(osColorSchemeIsDark);
 		}
-	}, []);
+	}, [isDarkTheme]);
 
 	return <ThemeProvider theme={isDarkTheme ? DarkTheme : LightTheme}>{children}</ThemeProvider>;
 };

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import * as Styled from './Card.styled';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Character, Comic, Creator } from '../../../entities';
 
 type CardProps = CharacterProps | CreatorProps | ComicProps;
@@ -34,7 +34,7 @@ export const Card: FC<CardProps> = (props) => {
 
 	if (props.variant === 'creator') {
 		return (
-			<Styled.Container key={props.id} onClick={() => redirect(`/characters/${props.id}`)}>
+			<Styled.Container key={props.id} onClick={() => redirect(`/creators/${props.id}`)}>
 				<Styled.Thumbnail src={`${props.thumbnail.path}.${props.thumbnail.extension}`} alt={props.fullName} />
 				<Styled.NameContainer>
 					<Styled.Name>{props.fullName}</Styled.Name>
@@ -45,7 +45,7 @@ export const Card: FC<CardProps> = (props) => {
 
 	if (props.variant === 'comic') {
 		return (
-			<Styled.Container key={props.id} onClick={() => redirect(`/characters/${props.id}`)}>
+			<Styled.Container key={props.id} onClick={() => redirect(`/comics/${props.id}`)}>
 				<Styled.Thumbnail src={`${props.thumbnail.path}.${props.thumbnail.extension}`} alt={props.title} />
 				<Styled.NameContainer>
 					<Styled.Name>{props.title}</Styled.Name>
