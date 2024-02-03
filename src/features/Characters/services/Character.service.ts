@@ -4,9 +4,12 @@ import { Character } from '../../../entities';
 const MarvelClient = new MarvelApi();
 
 export const CharacterService = {
-	GetCharacters: async (): Promise<Partial<{ characters: Array<Character>; errorMessage: string }>> => {
+	GetCharacters: async (offset: number): Promise<Partial<{ characters: Array<Character>; errorMessage: string }>> => {
+		const limit = 20;
+
 		const request: MarvelRequest = {
 			endpoint: '/characters',
+			query: `offset=${offset * limit}&limit=${limit}`,
 		};
 
 		const response: MarvelResponse = await MarvelClient.Get(request);

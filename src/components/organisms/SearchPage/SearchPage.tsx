@@ -14,6 +14,7 @@ export const SearchPage: FC<SearchPageProps> = ({ children }) => {
 			<Styled.Title>{content[1]}</Styled.Title>
 			<Styled.SearchBar>{content[2]}</Styled.SearchBar>
 			<Styled.Content>{content[3]}</Styled.Content>
+			<Styled.Loading>{content[4]}</Styled.Loading>
 		</Styled.Container>
 	);
 };

@@ -15,3 +15,10 @@ export const SearchBar = styled.div`
 export const Content = styled.div`
 	margin-top: 24px;
 `;
+
+export const Loading = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 24px;
+`;

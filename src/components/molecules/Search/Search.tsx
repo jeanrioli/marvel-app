@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useState } from 'react';
 import * as Styled from './Search.styled';
 
-import { Button, Input } from '../../atoms';
+import { Input, Loading } from '../../atoms';
 
 interface Suggestion {
 	label: string;
@@ -9,11 +9,14 @@ interface Suggestion {
 }
 
 interface SearchProps {
+	loading: boolean;
+	label: string;
 	onSearch: (searchedValue: string) => Promise<Array<Suggestion>>;
 	onSelect: (selectedValue: number) => void;
+	onClear: () => void;
 }
 
-export const Search: FC<SearchProps> = ({ onSearch, onSelect }) => {
+export const Search: FC<SearchProps> = ({ label, loading, onSearch, onSelect, onClear }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
 	const [suggestions, setSuggestions] = useState<Array<Suggestion>>([]);
@@ -42,12 +45,19 @@ export const Search: FC<SearchProps> = ({ onSearch, onSelect }) => {
 		setSuggestions([]);
 	};
 
+	const handleCleartInput = () => {
+		setSearchTerm('');
+		setSuggestions([]);
+		onClear();
+	};
+
 	return (
 		<Styled.Container>
-			<Input value={searchTerm} onChange={handleInputChange} />
-			{/* <Button variant='text' label='Search' onClick={() => onSelect(searchTerm)} /> */}
-			{suggestions.length > 0 ? (
-				<Styled.Dropdown>
+			<Input label={label} value={searchTerm} onChange={handleInputChange} onClickIcon={handleCleartInput} />
+			<Styled.Dropdown>
+				{searchTerm.length > 0 && loading ? (
+					<Loading />
+				) : suggestions.length > 0 ? (
 					<Styled.SuggestionsList>
 						{suggestions.map((suggestion) => (
 							<Styled.SuggestionItem onClick={() => handleSelectSuggestion(suggestion)}>
@@ -55,8 +65,8 @@ export const Search: FC<SearchProps> = ({ onSearch, onSelect }) => {
 							</Styled.SuggestionItem>
 						))}
 					</Styled.SuggestionsList>
-				</Styled.Dropdown>
-			) : null}
+				) : null}
+			</Styled.Dropdown>
 		</Styled.Container>
 	);
 };
